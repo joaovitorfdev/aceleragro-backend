@@ -1,0 +1,377 @@
+{
+  "version": 1,
+  "rule_ops": [
+    "eq",
+    "ne",
+    "in",
+    "not_in",
+    "filled",
+    "empty"
+  ],
+  "path_syntax": "Absolute paths use '<section>.<field>' (repeatable: '<section>.<index>.<field>'). Inside a section or repeatable item, '@.<field>' refers to the same section/item.",
+  "autofill": {
+    "default_min_confidence": "0.85"
+  },
+  "sections": [
+    {
+      "id": "proponent",
+      "label_key": "form.proponent.title",
+      "repeatable": null,
+      "fields": [
+        {
+          "id": "full_name",
+          "type": "text",
+          "label_key": "form.proponent.fields.full_name.label",
+          "required": true
+        },
+        {
+          "id": "document_number",
+          "type": "document_number",
+          "label_key": "form.proponent.fields.document_number.label",
+          "required": true
+        },
+        {
+          "id": "person_type",
+          "type": "radio",
+          "label_key": "form.proponent.fields.person_type.label",
+          "required": true,
+          "default": "individual",
+          "options": [
+            {
+              "value": "individual",
+              "label_key": "form.options.person_type.individual"
+            },
+            {
+              "value": "company",
+              "label_key": "form.options.person_type.company"
+            }
+          ]
+        },
+        {
+          "id": "marital_status",
+          "type": "select",
+          "label_key": "form.proponent.fields.marital_status.label",
+          "required": true,
+          "visible_when": {
+            "field": "@.person_type",
+            "op": "eq",
+            "value": "individual"
+          },
+          "options": [
+            {
+              "value": "single",
+              "label_key": "form.options.marital_status.single"
+            },
+            {
+              "value": "married",
+              "label_key": "form.options.marital_status.married"
+            },
+            {
+              "value": "stable_union",
+              "label_key": "form.options.marital_status.stable_union"
+            },
+            {
+              "value": "divorced",
+              "label_key": "form.options.marital_status.divorced"
+            },
+            {
+              "value": "widowed",
+              "label_key": "form.options.marital_status.widowed"
+            }
+          ]
+        },
+        {
+          "id": "spouse_name",
+          "type": "text",
+          "label_key": "form.proponent.fields.spouse_name.label",
+          "required": true,
+          "visible_when": {
+            "field": "@.marital_status",
+            "op": "in",
+            "value": [
+              "married",
+              "stable_union"
+            ]
+          }
+        },
+        {
+          "id": "spouse_document_number",
+          "type": "document_number",
+          "label_key": "form.proponent.fields.spouse_document_number.label",
+          "required": true,
+          "visible_when": {
+            "field": "@.marital_status",
+            "op": "in",
+            "value": [
+              "married",
+              "stable_union"
+            ]
+          }
+        },
+        {
+          "id": "address",
+          "type": "text",
+          "label_key": "form.proponent.fields.address.label"
+        },
+        {
+          "id": "phone",
+          "type": "text",
+          "label_key": "form.proponent.fields.phone.label"
+        },
+        {
+          "id": "email",
+          "type": "text",
+          "label_key": "form.proponent.fields.email.label"
+        }
+      ]
+    },
+    {
+      "id": "properties",
+      "label_key": "form.properties.title",
+      "repeatable": {
+        "max": 5,
+        "item_label_key": "form.properties.item",
+        "min": 0
+      },
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "label_key": "form.properties.fields.name.label"
+        },
+        {
+          "id": "municipality",
+          "type": "municipality",
+          "label_key": "form.properties.fields.municipality.label",
+          "required": true
+        },
+        {
+          "id": "ownership_type",
+          "type": "select",
+          "label_key": "form.properties.fields.ownership_type.label",
+          "required": true,
+          "options": [
+            {
+              "value": "registered_deed",
+              "label_key": "form.options.ownership_type.registered_deed"
+            },
+            {
+              "value": "purchase_sale_contract",
+              "label_key": "form.options.ownership_type.purchase_sale_contract"
+            },
+            {
+              "value": "possession_incra",
+              "label_key": "form.options.ownership_type.possession_incra"
+            },
+            {
+              "value": "lease",
+              "label_key": "form.options.ownership_type.lease"
+            },
+            {
+              "value": "partnership",
+              "label_key": "form.options.ownership_type.partnership"
+            },
+            {
+              "value": "other",
+              "label_key": "form.options.ownership_type.other"
+            }
+          ]
+        },
+        {
+          "id": "lease_owner_name",
+          "type": "text",
+          "label_key": "form.properties.fields.lease_owner_name.label",
+          "required": true,
+          "visible_when": {
+            "field": "@.ownership_type",
+            "op": "in",
+            "value": [
+              "lease",
+              "partnership"
+            ]
+          }
+        },
+        {
+          "id": "matricula",
+          "type": "text",
+          "label_key": "form.properties.fields.matricula.label",
+          "visible_when": {
+            "field": "@.ownership_type",
+            "op": "in",
+            "value": [
+              "registered_deed",
+              "purchase_sale_contract",
+              "other"
+            ]
+          }
+        },
+        {
+          "id": "car_code",
+          "type": "text",
+          "label_key": "form.properties.fields.car_code.label"
+        },
+        {
+          "id": "nirf",
+          "type": "text",
+          "label_key": "form.properties.fields.nirf.label"
+        },
+        {
+          "id": "area_ha",
+          "type": "decimal",
+          "label_key": "form.properties.fields.area_ha.label",
+          "required": true,
+          "suffix": "ha"
+        }
+      ]
+    },
+    {
+      "id": "credit",
+      "label_key": "form.credit.title",
+      "repeatable": null,
+      "fields": [
+        {
+          "id": "credit_purpose",
+          "type": "radio",
+          "label_key": "form.credit.fields.credit_purpose.label",
+          "required": true,
+          "options": [
+            {
+              "value": "investment",
+              "label_key": "form.options.credit_purpose.investment"
+            },
+            {
+              "value": "working_capital",
+              "label_key": "form.options.credit_purpose.working_capital"
+            }
+          ]
+        },
+        {
+          "id": "activity_kind",
+          "type": "select",
+          "label_key": "form.credit.fields.activity_kind.label",
+          "required": true,
+          "options": [
+            {
+              "value": "agriculture",
+              "label_key": "form.options.activity_kind.agriculture"
+            },
+            {
+              "value": "beef_cattle",
+              "label_key": "form.options.activity_kind.beef_cattle"
+            },
+            {
+              "value": "dairy_cattle",
+              "label_key": "form.options.activity_kind.dairy_cattle"
+            },
+            {
+              "value": "other",
+              "label_key": "form.options.activity_kind.other"
+            }
+          ]
+        },
+        {
+          "id": "financed_amount",
+          "type": "money",
+          "label_key": "form.credit.fields.financed_amount.label",
+          "required": true
+        },
+        {
+          "id": "term_years",
+          "type": "integer",
+          "label_key": "form.credit.fields.term_years.label",
+          "required": true,
+          "suffix": "anos"
+        },
+        {
+          "id": "grace_years",
+          "type": "integer",
+          "label_key": "form.credit.fields.grace_years.label",
+          "suffix": "anos",
+          "visible_when": {
+            "field": "@.credit_purpose",
+            "op": "eq",
+            "value": "investment"
+          }
+        },
+        {
+          "id": "guarantee_type",
+          "type": "select",
+          "label_key": "form.credit.fields.guarantee_type.label",
+          "options": [
+            {
+              "value": "property",
+              "label_key": "form.options.guarantee_type.property"
+            },
+            {
+              "value": "livestock",
+              "label_key": "form.options.guarantee_type.livestock"
+            },
+            {
+              "value": "personal",
+              "label_key": "form.options.guarantee_type.personal"
+            },
+            {
+              "value": "none",
+              "label_key": "form.options.guarantee_type.none"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "debts",
+      "label_key": "form.debts.title",
+      "repeatable": {
+        "max": 7,
+        "item_label_key": "form.debts.item",
+        "min": 0
+      },
+      "fields": [
+        {
+          "id": "creditor",
+          "type": "text",
+          "label_key": "form.debts.fields.creditor.label"
+        },
+        {
+          "id": "outstanding_balance",
+          "type": "money",
+          "label_key": "form.debts.fields.outstanding_balance.label",
+          "required": true
+        },
+        {
+          "id": "annual_rate",
+          "type": "percent",
+          "label_key": "form.debts.fields.annual_rate.label",
+          "required": true
+        },
+        {
+          "id": "remaining_term_years",
+          "type": "integer",
+          "label_key": "form.debts.fields.remaining_term_years.label",
+          "required": true,
+          "suffix": "anos"
+        },
+        {
+          "id": "grace_years",
+          "type": "integer",
+          "label_key": "form.debts.fields.grace_years.label",
+          "suffix": "anos"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "label_key": "form.review.title",
+      "repeatable": null,
+      "fields": [
+        {
+          "id": "technician_declaration",
+          "type": "boolean",
+          "label_key": "form.review.fields.technician_declaration.label",
+          "required": true,
+          "declaration": true
+        }
+      ]
+    }
+  ]
+}

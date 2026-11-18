@@ -1,0 +1,34 @@
+"""Audit trail for sensitive actions and data access."""
+
+from __future__ import annotations
+
+from django.conf import settings
+from django.db import models
+
+
+class AuditLog(models.Model):
+    organization_id = models.IntegerField(null=True, blank=True, db_index=True)
+    office_id = models.IntegerField(null=True, blank=True, db_index=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="audit_logs",
+    )
+    action = models.CharField(max_length=64)
+    resource_type = models.CharField(max_length=64, blank=True, default="")
+    resource_id = models.CharField(max_length=64, blank=True, default="")
+    detail = models.JSONField(default=dict, blank=True)
+    ip = models.GenericIPAddressField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["resource_type", "resource_id"]),
+            models.Index(fields=["action", "created_at"]),
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.action}:{self.resource_type}:{self.resource_id}"

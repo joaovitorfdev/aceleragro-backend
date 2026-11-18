@@ -1,0 +1,59 @@
+# Acelera Agro — minimal pt_BR catalog for PDF / backend strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: acelera-agro 0.1\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "BB Proposal — Sections 01-08"
+msgstr "Proposta BB — Seções 01-08"
+
+msgid "Proposal ID"
+msgstr "ID da proposta"
+
+msgid "Proponent"
+msgstr "Proponente"
+
+msgid "Section 01 — Identification"
+msgstr "Seção 01 — Identificação"
+
+msgid "Section 02 — Property"
+msgstr "Seção 02 — Imóvel"
+
+msgid "Section 03 — Activity"
+msgstr "Seção 03 — Atividade"
+
+msgid "Section 04 — Budget"
+msgstr "Seção 04 — Orçamento"
+
+msgid "Section 05 — Schedule"
+msgstr "Seção 05 — Cronograma"
+
+msgid "Section 06 — Capacity"
+msgstr "Seção 06 — Capacidade de pagamento"
+
+msgid "Section 07 — Classification"
+msgstr "Seção 07 — Enquadramento"
+
+msgid "Section 08 — Technical opinion"
+msgstr "Seção 08 — Parecer técnico"
+
+msgid "Annex — Budget"
+msgstr "Anexo — Orçamento"
+
+msgid "Annex — Classification"
+msgstr "Anexo — Enquadramento"
+
+msgid "Technical appraisal (laudo)"
+msgstr "Laudo técnico"
+
+msgid "ATNI declaration"
+msgstr "Declaração ATNI"
+
+msgid "Property sketch (croqui)"
+msgstr "Croqui do imóvel"
+
+msgid "Annex 2"
+msgstr "Anexo 2"
